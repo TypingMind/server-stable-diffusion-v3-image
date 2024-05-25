@@ -1,0 +1,89 @@
+{
+  "id": "image_generation_via_stable_diffusion_3",
+  "uuid": "f69b50c2-1a2b-48f0-9771-01a26bd5a13c",
+  "userSettings": [
+    {
+      "name": "stabilityAPIKey",
+      "required": true,
+      "type": "password",
+      "label": "StabilityAI API Key",
+      "description": "Get your free API Key from StabilityAI: https://platform.stability.ai/account/keys"
+    },
+    {
+      "name": "output_format",
+      "label": "Format of the generated image",
+      "description": "Optional, default: \"png\"",
+      "type": "enum",
+      "values": ["png", "jpeg"],
+      "defaultValue": "png"
+    },
+    {
+      "name": "aspect_ratio",
+      "label": "Aspect ratio of the generated image",
+      "description": "Optional, default: \"1:1\"",
+      "type": "enum",
+      "values": [
+        "16:9",
+        "1:1",
+        "21:9",
+        "2:3",
+        "3:2",
+        "4:5",
+        "5:4",
+        "9:16",
+        "9:21"
+      ],
+      "defaultValue": "1:1"
+    },
+    {
+      "name": "model",
+      "label": "Model to use for generation",
+      "description": "Optional, default: \"sd3\"",
+      "type": "enum",
+      "values": ["sd3", "sd3-turbo"],
+      "defaultValue": "sd3"
+    },
+    {
+      "name": "negative_prompt",
+      "label": "Negative prompt",
+      "description": "Optional, a blurb of text describing what you do not wish to see in the output image",
+      "type": "string",
+      "defaultValue": ""
+    }
+  ],
+  "iconURL": "/stable-diffusion.png",
+  "title": "Stable Diffusion v3 Image",
+  "openaiSpec": {
+    "name": "server_image_generation_via_stable_diffusion_3",
+    "parameters": {
+      "type": "object",
+      "required": ["prompt"],
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "The text description of the desired image."
+        }
+      }
+    },
+    "description": "Generate images using Stable Diffusion v3 based on a text description. Adhere to guidelines such as English translation, not depicting politicians or recent artists, and ensuring artist references are over 100 years old.\n\nWhen creating prompt: substitute artist names with style-describing adjectives, include artistic era, mention primary medium. Image type, descent, gender are to be explicitly stated. Avoid offense and bias, conceal identities except gender and physique, retain text references, replace profession titles with universal terms.\n\nPrompt changes aren't allowed unless they anonymise individuals. Replace creative professional/studio names with style descriptions. All prompts should detail every image part in objective terms within a detailed paragraph of over three sentences.\n\nImportant: after calling this function, the output images will be shown to the user automatically. You don't need to include the output image to the users again in your response to avoid duplicate images."
+  },
+  "system": false,
+  "httpAction": {
+    "id": "58cb9996-c777-4423-9acd-9a6fad076101",
+    "method": "POST",
+    "name": "",
+    "url": "https://api.stability.ai/v2beta/stable-image/generate/sd3",
+    "requestBody": "{\"prompt\":\"{prompt}\",\"model\":\"{model}\",\"aspect_ratio\":\"{aspect_ratio}\",\"negative_prompt\":\"{negative_prompt}\",\"output_format\":\"{output_format}\"}",
+    "requestHeaders": "{\"Accept\":\"application/json; type=image/*\",\"Authorization\":\"Bearer {stabilityAPIKey}\"}",
+    "resultTransform": {
+      "engine": "handlebars",
+      "templateString": "![prompt](data:image/png;base64,{{image}})"
+    },
+    "hasResultTransform": true,
+    "hasBody": true,
+    "hasHeaders": true
+  },
+  "isServerPlugin": true,
+  "implementationType": "http",
+  "outputType": "render_markdown"
+}
