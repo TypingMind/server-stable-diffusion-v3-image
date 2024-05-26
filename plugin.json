@@ -77,7 +77,7 @@
     "requestHeaders": "{\"Accept\":\"application/json; type=image/*\",\"Authorization\":\"Bearer {stabilityAPIKey}\"}",
     "resultTransform": {
       "engine": "handlebars",
-      "templateString": "![prompt](data:image/png;base64,{{image}})"
+      "templateString": "![{{__VARIABLES.prompt}}](data:image/{{__VARIABLES.output_format}};base64,{{image}})"
     },
     "hasResultTransform": true,
     "hasBody": true,
