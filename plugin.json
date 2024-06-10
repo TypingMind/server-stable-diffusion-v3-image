@@ -51,7 +51,7 @@
       "defaultValue": ""
     }
   ],
-  "iconURL": "/stable-diffusion.png",
+  "iconURL": "https://www.typingmind.com/stable-diffusion.png",
   "title": "Stable Diffusion v3 Image",
   "openaiSpec": {
     "name": "server_image_generation_via_stable_diffusion_3",
@@ -83,8 +83,6 @@
     "hasBody": true,
     "hasHeaders": true
   },
-  "isServerPlugin": true,
-  "implementationType": "http",
   "system": true,
   "outputType": "render_markdown"
 }
