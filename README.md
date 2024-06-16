@@ -1,3 +1,5 @@
+**Deprecated. Please use https://github.com/TypingMind/plugin-stable-diffusion-v3-image instead**
+
 # Stable Diffusion v3 Image
 
 Generate Unique Images with the Stable Diffusion Plugin
